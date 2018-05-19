@@ -53,5 +53,7 @@ b := struct {
 }
 ```
 
-Note we can perform conversion from one struct to the other if they have the same exact fields.
+Notes:
 
+* we can perform conversion from one *struct* to the other if they have the same exact fields.
+* anonymous *struct* doesn't require explicit conversion, if types are identical
