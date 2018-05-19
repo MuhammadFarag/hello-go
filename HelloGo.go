@@ -7,5 +7,4 @@ func main() {
 	helloWorld := "Hello world! :)"
 	fmt.Print(helloWorld)
 
-
 }
