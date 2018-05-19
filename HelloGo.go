@@ -28,4 +28,7 @@ func main() {
 
 	fmt.Println(b.description)
 
+	c := 5
+	fmt.Println("the address of c is:", &c)
+
 }

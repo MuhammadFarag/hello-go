@@ -57,3 +57,9 @@ Notes:
 
 * we can perform conversion from one *struct* to the other if they have the same exact fields.
 * anonymous *struct* doesn't require explicit conversion, if types are identical
+
+
+# Pointers
+* Everything in Go is pass by value.
+* Pointers is for pass by reference.
+* We use `&` similar to *C* to get the address of a var.
