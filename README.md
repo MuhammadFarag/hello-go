@@ -4,6 +4,9 @@
 
 * Unused variables result in compilation error.
 * The closest thing to scala `val` concept is `const`.
+* We might need to pay attention of the order of fields in a `struct` to optimize memory allocation due to **alignment**.
+* I am already confused on which case to use for *variables*, *constants*, *structs* etc. Will update this when I figure it out.
+
 ## Variable declaration
 
 ```go
@@ -19,3 +22,23 @@ The `:=` operator creates and assign a variable. `var a int` `var a int = 0`, `v
 Go doesn't have casting but instead it has conversion, which means you are creating a new variable and convert to it. You can even do that on declaration, so for an example you can say `a := float64(1.0)`
 
 I searched for something similar to Scala's `val` the closest thing is `const`, which you can use as `const a = 1`
+
+## Struct
+
+Declaring a new type *person*
+
+```go
+type person struct {
+	name string
+	age  int
+}
+```
+
+Instantiating an instance of *person*
+
+```go
+a := person{
+	name: "Some name",
+	age:  10,
+}
+```
