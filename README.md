@@ -52,3 +52,6 @@ b := struct {
 	description: "This is an anonymous struct!",
 }
 ```
+
+Note we can perform conversion from one struct to the other if they have the same exact fields.
+
