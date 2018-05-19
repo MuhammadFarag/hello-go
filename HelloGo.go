@@ -4,6 +4,7 @@ import "fmt"
 
 func main() {
 
-	helloWorld := "Hello world! :)"
+	const helloWorld = "Hello world! :)"
+
 	fmt.Print(helloWorld)
 }

@@ -3,7 +3,7 @@
 ## Interesting concepts
 
 * Unused variables result in compilation error.
-
+* The closest thing to scala `val` concept is `const`.
 ## Variable declaration
 
 ```go
@@ -17,3 +17,5 @@ Any variable in Go is initialized to a value, which is all bits set to zero by d
 The `:=` operator creates and assign a variable. `var a int` `var a int = 0`, `var a = 0` and `a := 0` have the same result. Note that Go has type inference, so you don't need to declare types explicitly.
 
 Go doesn't have casting but instead it has conversion, which means you are creating a new variable and convert to it. You can even do that on declaration, so for an example you can say `a := float64(1.0)`
+
+I searched for something similar to Scala's `val` the closest thing is `const`, which you can use as `const a = 1`
