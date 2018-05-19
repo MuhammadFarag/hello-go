@@ -20,4 +20,12 @@ func main() {
 
 	fmt.Println(a)
 
+	b := struct {
+		description string
+	}{
+		description: "This is an anonymous struct!",
+	}
+
+	fmt.Println(b.description)
+
 }

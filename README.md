@@ -42,3 +42,13 @@ a := person{
 	age:  10,
 }
 ```
+
+Finally there is a notion of anonymous struct
+
+```go
+b := struct {
+	description string
+}{
+	description: "This is an anonymous struct!",
+}
+```
