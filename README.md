@@ -148,3 +148,30 @@ sliceWithCapacity = append(sliceWithCapacity, 10, 20, 30, 40)
 The above call appends the elements to the slice. If you are keeping count, the number of elements exceed the capacity, what the slice does is that it doubles the capacity and create a new packing array for those values. It keeps doubling until the capacity exceeds a 1000 elements and in that case, it increases the capacity by 25%.
 
 You can take a "slice" of a slice, or in other words a subset of a slice using the syntax `subSlice := slice[4:5]`. Note that those two share the same packing array. Which means changes to one, affect the other. The only thing that can prevent this ripple effect is limiting the sub-slice size to minimum, i.e. the length and capacity are equal, and then append to the sub-slice. To do that we use `subSlice := slice[4:5:5]`. After the append, the packing array was copied and thus any changes to the sub-slice will not affect the source slice.
+
+### Maps
+
+The syntax to declare a zero map is
+```go
+map1 := make(map[string]int)
+```
+We can also initialize on declaration
+```go
+map1 := map[string]int{
+	"Google":   4,
+	"LinkedIn": 5,
+}
+```
+
+To add an item to a map we use `map1["Samsung"] = 3`, to delete an item from a map `delete(map1, "Samsung")`. Finding an item in a map is more interesting, as the result is two variables. The first is the zero value of the value and the second is a boolean that indicates whether or not the element was found.
+```go
+v, found := map1["Toshiba"]
+```
+You may just use `v := map1["Toshiba"]`. But, you wouldn't know if the value was actually `0` or not found.
+
+Finally iterating over a map using for
+```go
+for k, v := range map2 {
+	fmt.Println(k, v)
+}
+```

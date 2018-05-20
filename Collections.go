@@ -69,6 +69,27 @@ func main() {
 	info("slice", slice)
 	info("subSlice", subSlice)
 
+	map1 := make(map[string]int)
+	map1["Samsung"] = 3
+	map1["Samsung"] = 4
+	map1["Apple"] = 0
+	map1["Microsoft"] = 3
+	fmt.Println(map1)
+	delete(map1, "Apple")
+	fmt.Println(map1)
+
+	v, found := map1["Toshiba"]
+	fmt.Println("None existing value: '", v, found, "'")
+
+	map2 := map[string]int{
+		"Google":   4,
+		"LinkedIn": 5,
+	}
+
+	for k, v := range map2 {
+		fmt.Println(k, v)
+	}
+
 }
 
 func info(name string, s []int) {
