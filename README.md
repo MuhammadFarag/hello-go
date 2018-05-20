@@ -3,7 +3,6 @@
 ## Interesting concepts
 
 * Unused variables result in compilation error.
-* The closest thing to scala `val` concept is `const`.
 * We might need to pay attention of the order of fields in a `struct` to optimize memory allocation due to **alignment**.
 * I am already confused on which case to use for *variables*, *constants*, *structs* etc. Will update this when I figure it out.
 
