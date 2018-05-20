@@ -31,4 +31,12 @@ func main() {
 	c := 5
 	fmt.Println("the address of c is:", &c)
 
+	const (
+		c0 = iota // c0 == 0
+		c1        // c1 == 1
+		c2        // c2 == 2
+	)
+
+	fmt.Println(c2)
+
 }

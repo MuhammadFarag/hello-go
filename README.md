@@ -2,7 +2,7 @@
 
 ## Interesting concepts
 
-* Unused variables result in compilation error.
+* Unused variables result in compilation error, but unused constants do not.
 * We might need to pay attention of the order of fields in a `struct` to optimize memory allocation due to **alignment**.
 * I am already confused on which case to use for *variables*, *constants*, *structs* etc. Will update this when I figure it out.
 
@@ -63,3 +63,24 @@ Notes:
 * Pointers is for pass by reference.
 * We use `&` similar to *C* to get the address of a var.
 * We use `*` similar to *C* again to get the value that a pointer is pointing to.
+
+
+## Constants
+* Constants have a parallel type system, they could have a `type` or a `kind`!
+* `iota` is an interesting concept, the simplest use for it is to create an enum like constants with incremental value
+
+```go
+const (
+	c0 = iota  // c0 == 0
+	c1 = iota  // c1 == 1
+	c2 = iota  // c2 == 2
+)
+```
+Which can also be written as
+```go
+const (
+	c0 = iota  // c0 == 0
+	c1         // c1 == 1
+	c2         // c2 == 2
+)
+```
