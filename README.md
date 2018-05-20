@@ -67,7 +67,8 @@ Notes:
 
 ## Constants
 * Constants have a parallel type system, they could have a `type` or a `kind`!
-* `iota` is an interesting concept, the simplest use for it is to create an enum like constants with incremental value
+* `iota` is an interesting concept, the simplest use for it is to create an enum like constants with incremental value.
+* `iota` can be used for different increments and even with the shift operator  [iota](https://github.com/golang/go/wiki/Iota)
 
 ```go
 const (
