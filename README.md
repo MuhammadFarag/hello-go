@@ -86,3 +86,37 @@ const (
 	c2         // c2 == 2
 )
 ```
+
+### Arrays
+
+We can initialize an array using either of the following
+
+```go
+var array [5]string
+
+array[0] = "a"
+array[1] = "b"
+array[2] = "c"
+array[3] = "d"
+array[3] = "e"
+```
+
+or
+```go
+array := [5]string{"a", "b", "c", "d", "e"}
+```
+
+We can use the traditional for loop to loop through the array
+
+```go
+for i, s := range array {
+    fmt.Println(i, s)
+}
+```
+
+of the more Go'ish alternative
+```go
+for i := 0; i < len(array); i++ {
+	fmt.Println(i, array[i])
+}
+```
