@@ -1,13 +1,13 @@
 # Hello Go
 
-## Interesting concepts
+### Interesting concepts
 
 * Unused variables result in compilation error, but unused constants do not.
 * We might need to pay attention of the order of fields in a `struct` to optimize memory allocation due to **alignment**.
 * I am already confused on which case to use for *variables*, *constants*, *structs* etc. Will update this when I figure it out.
 * Following the above point: The fact that go encourages short variable names bugs me. In my point of view makes the code a tad harder to reason about.
 
-## Variable declaration
+### Variable declaration
 
 ```go
 var a int // initialized to zero
@@ -23,7 +23,7 @@ Go doesn't have casting but instead it has conversion, which means you are creat
 
 I searched for something similar to Scala's `val` the closest thing is `const`, which you can use as `const a = 1`
 
-## Struct
+### Struct
 
 Declaring a new type *person*
 
@@ -59,14 +59,14 @@ Notes:
 * anonymous *struct* doesn't require explicit conversion, if types are identical
 
 
-# Pointers
+### Pointers
 * Everything in Go is pass by value.
 * Pointers is for pass by reference.
 * We use `&` similar to *C* to get the address of a var.
 * We use `*` similar to *C* again to get the value that a pointer is pointing to.
 
 
-## Constants
+### Constants
 * Constants have a parallel type system, they could have a `type` or a `kind`!
 * `iota` is an interesting concept, the simplest use for it is to create an enum like constants with incremental value.
 * `iota` can be used for different increments and even with the shift operator  [iota](https://github.com/golang/go/wiki/Iota)
