@@ -5,6 +5,7 @@
 * Unused variables result in compilation error, but unused constants do not.
 * We might need to pay attention of the order of fields in a `struct` to optimize memory allocation due to **alignment**.
 * I am already confused on which case to use for *variables*, *constants*, *structs* etc. Will update this when I figure it out.
+* Following the above point: The fact that go encourages short variable names bugs me. In my point of view makes the code a tad harder to reason about.
 
 ## Variable declaration
 
