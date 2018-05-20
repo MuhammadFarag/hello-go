@@ -86,8 +86,8 @@ const (
 	c2         // c2 == 2
 )
 ```
-
-### Arrays
+### Collections
+#### Arrays
 
 We can initialize an array using either of the following
 
@@ -121,7 +121,7 @@ for i := 0; i < len(array); i++ {
 }
 ```
 
-### Slices
+#### Slices
 
 A *slice* is a data structure packed by an array (for simplicity).
 
@@ -149,7 +149,7 @@ The above call appends the elements to the slice. If you are keeping count, the 
 
 You can take a "slice" of a slice, or in other words a subset of a slice using the syntax `subSlice := slice[4:5]`. Note that those two share the same packing array. Which means changes to one, affect the other. The only thing that can prevent this ripple effect is limiting the sub-slice size to minimum, i.e. the length and capacity are equal, and then append to the sub-slice. To do that we use `subSlice := slice[4:5:5]`. After the append, the packing array was copied and thus any changes to the sub-slice will not affect the source slice.
 
-### Maps
+#### Maps
 
 The syntax to declare a zero map is
 ```go
