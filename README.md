@@ -63,3 +63,4 @@ Notes:
 * Everything in Go is pass by value.
 * Pointers is for pass by reference.
 * We use `&` similar to *C* to get the address of a var.
+* We use `*` similar to *C* again to get the value that a pointer is pointing to.
