@@ -120,3 +120,31 @@ for i := 0; i < len(array); i++ {
 	fmt.Println(i, array[i])
 }
 ```
+
+### Slices
+
+A *slice* is a data structure packed by an array (for simplicity).
+
+Declaring a slice:
+
+```go
+var zeroSlice []int
+```
+
+```go
+slice := make([]int, 5)
+```
+
+```go
+sliceWithCapacity := make([]int, 5, 8)
+```
+
+The third argument in the above example is *capacity*. When you declare a slice it has a length but also has a capacity, which is adjacent memory locations that are not utilized. This gives the slice some of the characteristics of dynamic data structures.
+
+```go
+sliceWithCapacity = append(sliceWithCapacity, 10, 20, 30, 40)
+```
+
+The above call appends the elements to the slice. If you are keeping count, the number of elements exceed the capacity, what the slice does is that it doubles the capacity and create a new packing array for those values. It keeps doubling until the capacity exceeds a 1000 elements and in that case, it increases the capacity by 25%.
+
+You can take a "slice" of a slice, or in other words a subset of a slice using the syntax `subSlice := slice[4:5]`. Note that those two share the same packing array. Which means changes to one, affect the other. The only thing that can prevent this ripple effect is limiting the sub-slice size to minimum, i.e. the length and capacity are equal, and then append to the sub-slice. To do that we use `subSlice := slice[4:5:5]`. After the append, the packing array was copied and thus any changes to the sub-slice will not affect the source slice.
