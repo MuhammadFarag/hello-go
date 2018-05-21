@@ -180,3 +180,4 @@ for k, v := range map2 {
 ## Resources
 1. [Ultimate Go Programming](https://www.safaribooksonline.com/library/view/ultimate-go-programming/9780134757476/)
 2. [Go Documentation](https://golang.org/doc/)
+3. [A tour of Go](https://tour.golang.org/list)
