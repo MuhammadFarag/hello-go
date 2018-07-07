@@ -176,8 +176,22 @@ for k, v := range map2 {
 }
 ```
 
+## Commandline arguments
+The `main` function which acts as the entry point of the program doesn't take arguments. To read arguments from command line you will find them in `os.Args`
+
+```go
+import "os"
+
+func main() {
+	for i:=0; i< len(os.Args); i++ {
+		println(os.Args[i])
+	}
+}
+```
+
 ---
 ## Resources
 1. [Ultimate Go Programming](https://www.safaribooksonline.com/library/view/ultimate-go-programming/9780134757476/)
-2. [Go Documentation](https://golang.org/doc/)
-3. [A tour of Go](https://tour.golang.org/list)
+2. [The Go Programming Language](https://www.gopl.io/)
+3. [Go Documentation](https://golang.org/doc/)
+4. [A tour of Go](https://tour.golang.org/list)
