@@ -189,6 +189,21 @@ for k, v := range map2 {
 }
 ```
 
+### File IO
+#### Reading files
+
+```go
+file, err := os.Open(fileNameAndPath)
+if err != nil {
+	println("Failed to open file: ", fileName, ". Error: ", err)
+} else {
+	scanner := bufio.NewScanner(file)
+	for i := 0; scanner.Scan(); i++ {
+		println(i, ": ", scanner.Text())
+	}
+}
+```
+
 ---
 ## Resources
 1. [Ultimate Go Programming](https://www.safaribooksonline.com/library/view/ultimate-go-programming/9780134757476/)
