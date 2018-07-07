@@ -7,6 +7,19 @@
 * I am already confused on which case to use for *variables*, *constants*, *structs* etc. Will update this when I figure it out.
 * Following the above point: The fact that go encourages short variable names bugs me. In my point of view makes the code a tad harder to reason about.
 
+### Commandline arguments
+The `main` function which acts as the entry point of the program doesn't take arguments. To read arguments from command line you will find them in `os.Args`
+
+```go
+import "os"
+
+func main() {
+	for i:=0; i< len(os.Args); i++ {
+		println(os.Args[i])
+	}
+}
+```
+
 ### Variable declaration
 
 ```go
@@ -173,19 +186,6 @@ Finally iterating over a map using for
 ```go
 for k, v := range map2 {
 	fmt.Println(k, v)
-}
-```
-
-## Commandline arguments
-The `main` function which acts as the entry point of the program doesn't take arguments. To read arguments from command line you will find them in `os.Args`
-
-```go
-import "os"
-
-func main() {
-	for i:=0; i< len(os.Args); i++ {
-		println(os.Args[i])
-	}
 }
 ```
 
