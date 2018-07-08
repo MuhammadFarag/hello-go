@@ -40,6 +40,15 @@ Go doesn't have casting but instead it has conversion, which means you are creat
 
 I searched for something similar to Scala's `val` the closest thing is `const`, which you can use as `const a = 1`
 
+#### Interesting aspects of variable declaration:
+
+```go
+var a, b, c = true, 1.5, "hello"
+var j = 0
+i, j := 0, 1 // reassign j and MUST declare at least one new variable
+i, j = j, i //swap variables
+```
+
 ### Struct
 
 Declaring a new type *person*
