@@ -62,6 +62,19 @@ i, j := 0, 1 // reassign j and MUST declare at least one new variable
 i, j = j, i //swap variables
 ```
 
+### Type
+
+`type` is not a type alias, which is different than Scala for an example. Which means the new type is not compatible, assignable or comparable to the original type. In my mind this is better than type aliasing because type aliasing, if overused, is in many cases redundant and confusing.
+`type timeInSeconds int` and `type timeInMilliSeconds float` are not compatible. You need to cast from one to the other (or just for correctness to `int` and then to the other) to convert.
+
+```go
+type timeInSeconds int
+type timeInMilliSeconds int
+
+var seconds timeInSeconds = 10
+var millis timeInMilliSeconds = timeInMilliSeconds(1000 * int(seconds))
+```
+
 ### Struct
 
 Declaring a new type *person*

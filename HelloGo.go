@@ -39,4 +39,14 @@ func main() {
 
 	fmt.Println(c2)
 
+	type timeInSeconds int
+	type timeInMilliSeconds int
+
+	var seconds timeInSeconds = 10
+	var millis timeInMilliSeconds = timeInMilliSeconds(1000 * int(seconds))
+
+	fmt.Println(millis)
+
+
+
 }
