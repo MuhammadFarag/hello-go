@@ -11,7 +11,9 @@
 * If an identifier name start with an upper case letter, it is `exported` which means it is visible outside of its package. Yes, visibility is determined by the case of the first letter.
 * The letters of acronyms are rendered in the same case. e.g. `someAPI` not `someApi`
 
-### Commandline arguments
+### Commandline
+
+#### Arguments
 The `main` function which acts as the entry point of the program doesn't take arguments. To read arguments from command line you will find them in `os.Args`
 
 ```go
@@ -23,6 +25,17 @@ func main() {
 	}
 }
 ```
+
+#### Flags
+
+```go
+f := flag.String("f","default value of this flag", "some interesting flag")
+flag.Parse()
+println(*f)
+arguments :=
+```
+
+`flag` package gives a convenient function to reach commandline arguments without the flags using `flag.Args()`. Of course, you can declare as many flags as you want. You can also use other types such a boolean flag using `flag.Bool(...)` function. One thing to note, the call to `flag.Parse()` must proceed calling `flag.Args()`
 
 ### Variable declaration
 
