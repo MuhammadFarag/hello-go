@@ -217,7 +217,32 @@ for i, line := range strings.Split(string(file), "\n") {
 }
 ```
 
+### Switch
+No fallthrough between cases by default, even though you can override that using `fallthrough` keyword which has to be the last statement in the case.
+I am surprised that the following code compiled, or at least showed no warnings, given that the default statement is not reachable. Even without the fall through where `println("ola") was not reachable, that was no problem at all.
 
+```go
+switch "hi" {
+case "hello", "hi":
+	println("hi")
+	fallthrough
+case "ola":
+	println("ola")
+default:
+	println("The default")
+}
+```
+
+Switch can get more interesting:
+```go
+x:= "hi"
+switch {
+case strings.Contains("hi there", x):
+	println("contains hi")
+default:
+	println("default")
+}
+```
 
 ---
 ## Resources
@@ -225,3 +250,4 @@ for i, line := range strings.Split(string(file), "\n") {
 2. [The Go Programming Language](https://www.gopl.io/)
 3. [Go Documentation](https://golang.org/doc/)
 4. [A tour of Go](https://tour.golang.org/list)
+5. [Go wiki: Switch](https://github.com/golang/go/wiki/Switch)
