@@ -191,6 +191,7 @@ for k, v := range map2 {
 
 ### File IO
 #### Reading files
+##### Scanning files
 
 ```go
 file, err := os.Open(fileNameAndPath)
@@ -203,6 +204,20 @@ if err != nil {
 	}
 }
 ```
+
+##### Reading files to memory
+
+```go
+file, err := ioutil.ReadFile(fileName)
+if err != nil {
+	println("Failed to open file: ", fileName, ". Error: ", err)
+}
+for i, line := range strings.Split(string(file), "\n") {
+	println(i, ": ", line)
+}
+```
+
+
 
 ---
 ## Resources
