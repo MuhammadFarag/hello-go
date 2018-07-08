@@ -22,6 +22,7 @@ func scanFile(fileName string) {
 		for i := 0; scanner.Scan(); i++ {
 			println(i, ": ", scanner.Text())
 		}
+		file.Close()
 	}
 }
 
@@ -32,6 +33,5 @@ func readFile(fileName string) {
 	}
 	for i, line := range strings.Split(string(file), "\n") {
 		println(i, ": ", line)
-
 	}
 }
