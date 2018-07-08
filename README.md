@@ -7,6 +7,10 @@
 * I am already confused on which case to use for *variables*, *constants*, *structs* etc. Will update this when I figure it out.
 * Following the above point: The fact that go encourages short variable names bugs me. In my point of view makes the code a tad harder to reason about.
 
+### Code style
+* If an identifier name start with an upper case letter, it is `exported` which means it is visible outside of its package. Yes, visibility is determined by the case of the first letter.
+* The letters of acronyms are rendered in the same case. e.g. `someAPI` not `someApi`
+
 ### Commandline arguments
 The `main` function which acts as the entry point of the program doesn't take arguments. To read arguments from command line you will find them in `os.Args`
 
