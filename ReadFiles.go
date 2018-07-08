@@ -7,6 +7,10 @@ import (
 
 func main() {
 	fileName := os.Args[1]
+	scanFile(fileName)
+}
+
+func scanFile(fileName string){
 	file, err := os.Open(fileName)
 	if err != nil {
 		println("Failed to open file: ", fileName, ". Error: ", err)
