@@ -158,6 +158,8 @@ or
 array := [5]string{"a", "b", "c", "d", "e"}
 ```
 
+In the last example, we can replace the length of the array `5` with `...` which will result in automatically deducting the size from the number of elements.
+
 We can use the traditional for loop to loop through the array
 
 ```go
@@ -172,6 +174,9 @@ for i, s := range array {
     fmt.Println(i, s)
 }
 ```
+
+##### Notes
+- The size of the array is part of the type. i.e. the type is `[5]int` not an array of `int`. Thus `[5]int` and `[3]int` are not compatible types and variable of one type can't receive a value of the other.
 
 #### Slices
 
