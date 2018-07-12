@@ -30,6 +30,11 @@ func main() {
 		fmt.Println(i, strings2[i])
 	}
 
+	a := [...]string{0:"a", 2:"b"}
+
+	for i, s := range a {
+		fmt.Println("check: ", i, s)
+	}
 	// slice doubles in capacity to expand until it reaches 1000 elements and then it increases by ~25%
 	var zeroSlice []int
 	info("zeroSlice", zeroSlice)

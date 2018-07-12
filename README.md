@@ -160,6 +160,11 @@ array := [5]string{"a", "b", "c", "d", "e"}
 
 In the last example, we can replace the length of the array `5` with `...` which will result in automatically deducting the size from the number of elements.
 
+We can also skip indexes. The skipped indexes will be set to the zero value of the type, in the following example an empty string. The type of the following array is `[3]string` since the index ` is implicitly set to empty string.
+```go
+a := [...]string{0:"a", 2:"b"}
+```
+
 We can use the traditional for loop to loop through the array
 
 ```go
