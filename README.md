@@ -301,3 +301,4 @@ default:
 4. [A tour of Go](https://tour.golang.org/list)
 5. [Go wiki: Switch](https://github.com/golang/go/wiki/Switch)
 6. [The Go Programming Language Specification](https://golang.org/ref/spec)
+7. [Go by Example](https://gobyexample.com/)
