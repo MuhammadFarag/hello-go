@@ -177,6 +177,7 @@ for i, s := range array {
 
 ##### Notes
 - The size of the array is part of the type. i.e. the type is `[5]int` not an array of `int`. Thus `[5]int` and `[3]int` are not compatible types and variable of one type can't receive a value of the other.
+- Arrays are rarely used because the cases of fixed size arrays are very limited. Slices are a more powerful alternative.
 
 #### Slices
 
