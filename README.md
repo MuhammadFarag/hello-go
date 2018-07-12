@@ -161,15 +161,15 @@ array := [5]string{"a", "b", "c", "d", "e"}
 We can use the traditional for loop to loop through the array
 
 ```go
-for i, s := range array {
-    fmt.Println(i, s)
+for i := 0; i < len(array); i++ {
+	fmt.Println(i, array[i])
 }
 ```
 
 of the more Go'ish alternative
 ```go
-for i := 0; i < len(array); i++ {
-	fmt.Println(i, array[i])
+for i, s := range array {
+    fmt.Println(i, s)
 }
 ```
 
