@@ -231,6 +231,12 @@ v, found := map1["Toshiba"]
 ```
 You may just use `v := map1["Toshiba"]`. But, you wouldn't know if the value was actually `0` or not found.
 
+By convention the second result is not called found but rather `ok` and we usually end up with the following pattern:
+
+```go
+if n, ok := map1["Toshiba"]; !ok { ... }
+```
+
 Finally iterating over a map using for
 ```go
 for k, v := range map2 {
