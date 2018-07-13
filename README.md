@@ -244,6 +244,10 @@ for k, v := range map2 {
 }
 ```
 
+##### Sets
+
+This is intentionally a subset of Maps. There is no sets in Go, but since map keys can't duplicate, maps can be used to represent sets. For an example to represent a set of strings we can use `map[string]bool` This is a "set of strings"
+
 ### File IO
 #### Reading files
 ##### Scanning files
