@@ -94,6 +94,13 @@ a := person{
 }
 ```
 
+We can instantiate person without naming the fields, given that we provide all fields in the correct order. If we don't provide any of the fields, i.e. use `{}` we end up with an object with all its fields set to its corresponding zero value.
+
+```go
+a1 := person {"name 1", 1}
+a2 := person {}
+```
+
 Finally there is a notion of anonymous struct
 
 ```go

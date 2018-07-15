@@ -18,6 +18,12 @@ func main() {
 		age:  10,
 	}
 
+	a1 := person {}
+	fmt.Println(a1)
+
+	a2 := person {"name 2", 2}
+	fmt.Println(a2)
+
 	fmt.Println(a)
 
 	b := struct {
