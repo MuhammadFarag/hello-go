@@ -135,18 +135,38 @@ We notice that we have two *anonymous* fields, one of type `person` and the othe
 ```go
 p := player{person{"jack", 23}, "game", 1}
 
-fmt.Println(p)
-fmt.Println(p.person.name)
-fmt.Println(p.int)
+fmt.Println(p)              // {{jack 23} game 1}
+fmt.Println(p.person.name)  // jack
+fmt.Println(p.int)          // 1
 ```
 
 Go also give us another interesting feature, you can access the fields of the embedded type, `person` in our case, directly using `p.name` for example... just like that.
 
 ```go
-fmt.Println(p.name)
+fmt.Println(p.name)         // jack
 ```
 
-If both the embedded and the embedding type has fields holding the same name, then you will need to use `p.name` for the embedding type and `p.person.name` for the embedded type.
+If both the embedded and the embedding type has fields holding the same name, then you will need to use `p.name` for the embedding type and `p.person.name` for the embedded type. Let's redefine our type player and create an instance of it.
+
+```go
+type player struct {
+	person
+	favouriteGame string
+	int
+	name string
+}
+
+p := player{person{"jack", 23}, "game", 1, "Mo"}
+```
+
+As you can see we have defined `name` twice. In that case the one defined in the `player` struct will hide the one from `person` struct.
+
+```go
+fmt.Println(p)              // {{jack 23} game 1 Mo}
+fmt.Println(p.person.name)  // jack
+fmt.Println(p.name)         // Mo
+fmt.Println(p.int)          // 1
+```
 
 Notes:
 
