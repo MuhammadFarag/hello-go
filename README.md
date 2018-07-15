@@ -101,6 +101,13 @@ a1 := person {"name 1", 1}
 a2 := person {}
 ```
 
+There is also the built in function `new` which creates a pointer to a zero allocation of the type, thus the following two are identical
+```go
+a2 := &person {}
+a3 := new(person)
+```
+
+
 Finally there is a notion of anonymous struct
 
 ```go

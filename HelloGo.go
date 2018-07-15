@@ -24,6 +24,9 @@ func main() {
 	a2 := person {"name 2", 2}
 	fmt.Println(a2)
 
+	a3 := new(person)
+	fmt.Println(a3)
+
 	fmt.Println(a)
 
 	b := struct {
