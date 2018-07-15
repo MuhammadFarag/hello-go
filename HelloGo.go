@@ -2,15 +2,11 @@ package main
 
 import "fmt"
 
-
-
 func main() {
 
 	const helloWorld = "Hello world! :)"
 
 	fmt.Println(helloWorld)
-
-
 
 	c := 5
 	fmt.Println("the address of c is:", &c)
@@ -30,7 +26,5 @@ func main() {
 	var millis timeInMilliSeconds = timeInMilliSeconds(1000 * int(seconds))
 
 	fmt.Println(millis)
-
-
 
 }

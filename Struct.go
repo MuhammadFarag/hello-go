@@ -14,10 +14,10 @@ func main() {
 		age:  10,
 	}
 
-	a1 := person {}
+	a1 := person{}
 	fmt.Println(a1)
 
-	a2 := person {"name 2", 2}
+	a2 := person{"name 2", 2}
 	fmt.Println(a2)
 
 	a3 := new(person)

@@ -13,11 +13,11 @@ func main() {
 		println("The default")
 	}
 
-x:= "hi"
-switch {
-case strings.Contains("hi there", x):
-	println("contains hi")
-default:
-	println("default")
-}
+	x := "hi"
+	switch {
+	case strings.Contains("hi there", x):
+		println("contains hi")
+	default:
+		println("default")
+	}
 }

@@ -30,7 +30,7 @@ func main() {
 		fmt.Println(i, strings2[i])
 	}
 
-	a := [...]string{0:"a", 2:"b"}
+	a := [...]string{0: "a", 2: "b"}
 
 	for i, s := range a {
 		fmt.Println("check: ", i, s)
