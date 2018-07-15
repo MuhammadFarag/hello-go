@@ -118,6 +118,36 @@ b := struct {
 }
 ```
 
+#### Type embedding
+
+Let's look at the following example using the person type we have defined earlier, we define a new type player.
+
+```go
+type player struct {
+	person
+	favouriteGame string
+	int
+}
+```
+
+We notice that we have two *anonymous* fields, one of type `person` and the other of type `int`. The question now, how do you access those? The field names are implicit and they are the same as the type.
+
+```go
+p := player{person{"jack", 23}, "game", 1}
+
+fmt.Println(p)
+fmt.Println(p.person.name)
+fmt.Println(p.int)
+```
+
+Go also give us another interesting feature, you can access the fields of the embedded type, `person` in our case, directly using `p.name` for example... just like that.
+
+```go
+fmt.Println(p.name)
+```
+
+If both the embedded and the embedding type has fields holding the same name, then you will need to use `p.name` for the embedding type and `p.person.name` for the embedded type.
+
 Notes:
 
 * we can perform conversion from one *struct* to the other if they have the same exact fields.

@@ -7,6 +7,11 @@ type person struct {
 	age  int
 }
 
+type player struct {
+	person
+	favouriteGame string
+	int
+}
 
 func main() {
 	a := person{
@@ -33,4 +38,11 @@ func main() {
 
 	fmt.Println(b.description)
 	fmt.Println((&b).description)
+
+	p := player{person{"jack", 23}, "game", 1}
+
+	fmt.Println(p)
+	fmt.Println(p.person.name)
+	fmt.Println(p.name)
+	fmt.Println(p.int)
 }
