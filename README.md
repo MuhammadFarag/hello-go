@@ -107,8 +107,13 @@ b := struct {
 Notes:
 
 * we can perform conversion from one *struct* to the other if they have the same exact fields.
-* anonymous *struct* doesn't require explicit conversion, if types are identical
+* Anonymous *struct* doesn't require explicit conversion, if types are identical
+* If we are trying to access a field in a pointer to a struct, we don't need to explicitly use `*` to get to the contents of that stucts, we can use `.` directly. That is the following two lines of codes will print the exact same thing
 
+```go
+fmt.Println(b.description)
+fmt.Println((&b).description)
+```
 
 ### Pointers
 * Everything in Go is pass by value.
