@@ -1,7 +1,29 @@
 # Hello Go
 
-### Interesting concepts
+[TOC levels=4]: #
+# Table of Contents
+- [Interesting concepts](#interesting-concepts)
+- [Code style](#code-style)
+- [Commandline](#commandline)
+    - [Arguments](#arguments)
+    - [Flags](#flags)
+- [Variable declaration](#variable-declaration)
+    - [Interesting aspects of variable declaration:](#interesting-aspects-of-variable-declaration)
+- [Type](#type)
+- [Struct](#struct)
+    - [Type embedding](#type-embedding)
+- [Pointers](#pointers)
+- [Constants](#constants)
+- [Collections](#collections)
+    - [Arrays](#arrays)
+    - [Slices](#slices)
+    - [Maps](#maps)
+- [File IO](#file-io)
+    - [Reading files](#reading-files)
+- [Switch](#switch)
+- [Resources](#resources)
 
+### Interesting concepts
 * Unused variables result in compilation error, but unused constants do not.
 * We might need to pay attention of the order of fields in a `struct` to optimize memory allocation due to **alignment**.
 * Following the above point: The fact that go encourages short variable names bugs me. In my point of view makes the code a tad harder to reason about.
