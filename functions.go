@@ -19,7 +19,7 @@ func main() {
 		// an error has occurred
 	}
 
-	if _, err := somethingElseMightGoWrong(); err !=nil {
+	if _, err := somethingElseMightGoWrong(); err != nil {
 		// do something
 	}
 	println(err.Error())
@@ -30,15 +30,15 @@ func threeTimes(a, b string) (r1 string, r2 string, r3 string) {
 	return r, r, r
 }
 
-func namedResult() (r string){
+func namedResult() (r string) {
 	r = "Hello Go"
 	return
 }
 
-func somethingMightGoWrong()(string, bool) {
+func somethingMightGoWrong() (string, bool) {
 	return "", false
 }
 
-func somethingElseMightGoWrong()(string, error) {
+func somethingElseMightGoWrong() (string, error) {
 	return "", fmt.Errorf("error: %s", "error description")
 }
