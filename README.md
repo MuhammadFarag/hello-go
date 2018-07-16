@@ -14,6 +14,8 @@
     - [Type embedding](#type-embedding)
 - [Pointers](#pointers)
 - [Constants](#constants)
+- [Functions](#functions)
+    - [Errors](#errors)
 - [Collections](#collections)
     - [Arrays](#arrays)
     - [Slices](#slices)
@@ -252,6 +254,44 @@ func namedResult() (r string){
 ```
 Go doesn't support tail recursion optimization. However, function stacks in go is dynamic which mitigate the risk of stack over flow, thus most of reasonably bound or terminating recursion calls are safe.
 
+#### Errors
+
+Function may return errors. Since Go has multiple results by convention the last result is an error indicator or an error. An error indicator is a boolean that will evaluate to true if there is no errors.
+
+```go
+func somethingMightGoWrong()(string, bool) {
+	return "", false
+}
+
+_, ok := somethingMightGoWrong()
+
+if !ok {
+	// an error has occurred
+}
+```
+
+An error result might be returned if we need more information on the error
+
+```go
+func somethingElseMightGoWrong()(string, error) {
+	return "", fmt.Errorf("error: %s", "error description")
+}
+_, err := somethingElseMightGoWrong()
+
+if err != nil {
+    // an error has occurred
+}
+```
+
+We can also check for error and execute accordingly.
+
+```go
+if _, err := somethingElseMightGoWrong(); err !=nil {
+    // do something
+}
+```
+
+The downside with that though is that the function results are only visible within the scope of the if statement, which might be ok in some cases.
 ### Collections
 #### Arrays
 

@@ -8,6 +8,21 @@ func main() {
 	a, b, c := threeTimes("hello", "Go")
 	println(a, b, c)
 	println(namedResult())
+
+	_, ok := somethingMightGoWrong()
+	if !ok {
+		// an error has occurred
+	}
+	println(ok)
+	_, err := somethingElseMightGoWrong()
+	if err != nil {
+		// an error has occurred
+	}
+
+	if _, err := somethingElseMightGoWrong(); err !=nil {
+		// do something
+	}
+	println(err.Error())
 }
 
 func threeTimes(a, b string) (r1 string, r2 string, r3 string) {
@@ -18,4 +33,12 @@ func threeTimes(a, b string) (r1 string, r2 string, r3 string) {
 func namedResult() (r string){
 	r = "Hello Go"
 	return
+}
+
+func somethingMightGoWrong()(string, bool) {
+	return "", false
+}
+
+func somethingElseMightGoWrong()(string, error) {
+	return "", fmt.Errorf("error: %s", "error description")
 }
