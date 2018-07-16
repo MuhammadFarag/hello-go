@@ -31,6 +31,7 @@
 ### Code style
 * If an identifier name start with an upper case letter, it is `exported` which means it is visible outside of its package. Yes, visibility is determined by the case of the first letter.
 * The letters of acronyms are rendered in the same case. e.g. `someAPI` not `someApi`
+* File names should not include `-`, `_` or use camel case. Yes, just short lower case name. Of course it could be `shortname.go` or `shrtnm.go`. The reason why underscores are not a good idea, Go build tool actually uses underscores to distinguish between different architectures.
 
 ### Commandline
 
