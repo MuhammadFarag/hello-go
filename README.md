@@ -230,6 +230,28 @@ const (
 	c2         // c2 == 2
 )
 ```
+
+### Functions
+
+Functions may have multiple results, i.e. it might return more than one value separated by a comma. It is possible to have a name for each of the returned results for documentation purposes mostly.
+
+```go
+func threeTimes(a, b string) (r1 string, r2 string, r3 string) {
+	r := fmt.Sprintf("%s %s", a, b)
+	return r, r, r
+}
+```
+
+It is possible to omit the arguments of the return statement if the named results if they have been assigned within the function, but that is not recommended because it makes code harder to reason about.
+
+```go
+func namedResult() (r string){
+	r = "Hello Go"
+	return
+}
+```
+Go doesn't support tail recursion optimization. However, function stacks in go is dynamic which mitigate the risk of stack over flow, thus most of reasonably bound or terminating recursion calls are safe.
+
 ### Collections
 #### Arrays
 
