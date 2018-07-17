@@ -30,6 +30,8 @@ func main() {
 	}
 
 	consumeBehaviour(namedResult)
+
+	consumeBehaviour(func() string { return "Hi" })
 }
 
 func threeTimes(a, b string) (r1 string, r2 string, r3 string) {

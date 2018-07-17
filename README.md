@@ -266,7 +266,11 @@ func consumeBehaviour(f func() string) {
 consumeBehaviour(namedResult)
 ```
 
-`consumeBehaviour` takes an argument `f` which takes no arguments and returns a string. The function `newResult` we defined earlier fits the requirement.
+`consumeBehaviour` takes an argument `f` which takes no arguments and returns a string. The function `newResult` we defined earlier fits the requirement. We don't even need to pass a concrete function, we can pass an *anonymous function*
+
+```go
+consumeBehaviour(func () string {return "Hi"})
+```
 
 #### Errors
 
