@@ -15,6 +15,7 @@
 - [Pointers](#pointers)
 - [Constants](#constants)
 - [Functions](#functions)
+    - [Higher order functions](#higher-order-functions)
     - [Errors](#errors)
 - [Collections](#collections)
     - [Arrays](#arrays)
@@ -253,6 +254,19 @@ func namedResult() (r string){
 }
 ```
 Go doesn't support tail recursion optimization. However, function stacks in go is dynamic which mitigate the risk of stack over flow, thus most of reasonably bound or terminating recursion calls are safe.
+
+#### Higher order functions
+Higher order functions are functions that take functions as their argument. Since functions are first class citizens in Go, they have a type and they can be passed around. a function type is a representation for its arguments and its return. In this case we are passing behaviour as a parameter.
+
+```go
+func consumeBehaviour(f func() string) {
+	println(f())
+}
+
+consumeBehaviour(namedResult)
+```
+
+`consumeBehaviour` takes an argument `f` which takes no arguments and returns a string. The function `newResult` we defined earlier fits the requirement.
 
 #### Errors
 

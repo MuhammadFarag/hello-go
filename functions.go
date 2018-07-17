@@ -28,6 +28,8 @@ func main() {
 	if err := returnSpecificError(); err == SpecificError {
 		println(err.Error())
 	}
+
+	consumeBehaviour(namedResult)
 }
 
 func threeTimes(a, b string) (r1 string, r2 string, r3 string) {
@@ -52,4 +54,8 @@ var SpecificError = errors.New("Specific error")
 
 func returnSpecificError() error {
 	return SpecificError
+}
+
+func consumeBehaviour(f func() string) {
+	println(f())
 }
