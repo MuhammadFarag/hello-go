@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 )
 
@@ -23,6 +24,10 @@ func main() {
 		// do something
 	}
 	println(err.Error())
+
+	if err := returnSpecificError(); err == SpecificError {
+		println(err.Error())
+	}
 }
 
 func threeTimes(a, b string) (r1 string, r2 string, r3 string) {
@@ -41,4 +46,10 @@ func somethingMightGoWrong() (string, bool) {
 
 func somethingElseMightGoWrong() (string, error) {
 	return "", fmt.Errorf("error: %s", "error description")
+}
+
+var SpecificError = errors.New("Specific error")
+
+func returnSpecificError() error {
+	return SpecificError
 }

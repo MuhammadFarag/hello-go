@@ -292,6 +292,21 @@ if _, err := somethingElseMightGoWrong(); err !=nil {
 ```
 
 The downside with that though is that the function results are only visible within the scope of the if statement, which might be ok in some cases.
+
+We can define specific errors for comparison purposes. That is in case the client might want to take different actions based on different errors.
+
+```go
+var SpecificError = errors.New("Specific error")
+
+func returnSpecificError() error{
+	return SpecificError
+}
+
+if err:= returnSpecificError(); err == SpecificError {
+		println(err.Error())
+	}
+```
+
 ### Collections
 #### Arrays
 
