@@ -301,7 +301,7 @@ will yield
 Note that the second deferred function was executed first and both functions had the value of the result, even though it was not assigned at the time defer-1 was declared. A very intriguing use case is where one can capture a changing value at both the point of entry and exit of the function, to a more specific example, how about getting the running time of a function?
 
 ```go
-func captureMutation() {
+func functionAsFinally() {
 	defer func() func() {
 		before := time.Now()
 		return func() { println("Elapsed time:", (time.Now().Sub(before)).String()) }
