@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"time"
 )
 
 func main() {
@@ -36,6 +37,8 @@ func main() {
 	variadic(1)
 
 	letsDefer("hello")
+
+	captureMutation()
 }
 
 func threeTimes(a, b string) (r1 string, r2 string, r3 string) {
@@ -76,4 +79,11 @@ func letsDefer(s string) (r string) {
 	r = "r-" + s
 	defer func() { println("defer 2:", s, r) }()
 	return r
+}
+
+func captureMutation() {
+	defer func() func() {
+		before := time.Now()
+		return func() { println("Elapsed time:", (time.Now().Sub(before)).String()) }
+	}()()
 }
