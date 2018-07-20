@@ -32,6 +32,8 @@ func main() {
 	consumeBehaviour(namedResult)
 
 	consumeBehaviour(func() string { return "Hi" })
+
+	variadic(1)
 }
 
 func threeTimes(a, b string) (r1 string, r2 string, r3 string) {
@@ -60,4 +62,9 @@ func returnSpecificError() error {
 
 func consumeBehaviour(f func() string) {
 	println(f())
+}
+
+func variadic(x ...int) {
+	println(fmt.Sprintf("The type of this function is: %T", variadic))
+	println(fmt.Sprintf("The type of argument is %T and its value is %v", x, x))
 }

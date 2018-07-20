@@ -272,6 +272,16 @@ consumeBehaviour(namedResult)
 consumeBehaviour(func () string {return "Hi"})
 ```
 
+#### Variadic function
+
+A variadic function can receive zero or more of its arguments. The significant thing to note here is the signature of the function `func(...int)`, which means it doesn't have the same signature as `func([]int)` which is a function taking a slice of int.
+```go
+func variadic(x...int){
+	println(fmt.Sprintf("The type of this function is: %T", variadic))              //  The type of this function is: func(...int)
+	println(fmt.Sprintf("The type of argument is %T and its value is %v", x, x))    //  The type of argument is []int and its value is [1]
+}
+```
+
 #### Errors
 
 Function may return errors. Since Go has multiple results by convention the last result is an error indicator or an error. An error indicator is a boolean that will evaluate to true if there is no errors.
