@@ -309,6 +309,8 @@ func captureMutation() {
 }
 ```
 
+In summary defer makes a function act like a `finally` block for the enclosing function.
+
 #### Errors
 
 Function may return errors. Since Go has multiple results by convention the last result is an error indicator or an error. An error indicator is a boolean that will evaluate to true if there is no errors.
