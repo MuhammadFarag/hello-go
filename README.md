@@ -282,6 +282,23 @@ func variadic(x...int){
 }
 ```
 
+#### Defer
+
+A function marked as defer is executed at the end of the enclosing function, regardless how the enclosing function ends. deferred functions are executed in the reverse order of their declaration inside the enclosing function. For example
+
+```go
+func letsDefer(s string) (r string) {
+	defer func() {println("defer 1:", s ,r)}()
+	r = "r-" + s
+	defer func() {println("defer 2:", s ,r)}()
+	return r
+}
+```
+will yield
+>defer 2: hello r-hello  
+>defer 1: hello r-hello
+
+Note that the second deferred function was executed first and both functions had the value of the result, even though it was not assigned at the time defer-1 was declared.
 #### Errors
 
 Function may return errors. Since Go has multiple results by convention the last result is an error indicator or an error. An error indicator is a boolean that will evaluate to true if there is no errors.

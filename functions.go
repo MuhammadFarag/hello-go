@@ -34,6 +34,8 @@ func main() {
 	consumeBehaviour(func() string { return "Hi" })
 
 	variadic(1)
+
+	letsDefer("hello")
 }
 
 func threeTimes(a, b string) (r1 string, r2 string, r3 string) {
@@ -67,4 +69,11 @@ func consumeBehaviour(f func() string) {
 func variadic(x ...int) {
 	println(fmt.Sprintf("The type of this function is: %T", variadic))
 	println(fmt.Sprintf("The type of argument is %T and its value is %v", x, x))
+}
+
+func letsDefer(s string) (r string) {
+	defer func() { println("defer 1:", s, r) }()
+	r = "r-" + s
+	defer func() { println("defer 2:", s, r) }()
+	return r
 }
