@@ -398,6 +398,34 @@ func main() {
 }
 ```
 
+### Methods
+Let's create a simple type, `account` which has one field `money`, we will create a one method `add` which will add some money to the account.
+
+```go
+type account struct {
+	money int
+}
+
+func (a account) add(amount int) {
+	a.money += amount
+}
+```
+
+Let's give it a shot
+
+```go
+func main() {
+	a:= account{}
+	fmt.Println("Account before: %v", a)        // Account before: %v {0}
+	a.add(15)
+	fmt.Println("Account after add: %v", a)     // Account after add: %v {0}
+}
+```
+
+What just happened? Since by default in Go function arguments are passed by value not by reference, what was passed into the add function was a copy of account. So changes in the value itself doesn't affect the value of `a` in the main function. To use more accurate language, that first argument (before the method name) is called *function receiver*. So, the function receiver is a copy.
+
+
+
 ### Collections
 #### Arrays
 
