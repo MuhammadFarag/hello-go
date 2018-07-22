@@ -364,6 +364,23 @@ if err:= returnSpecificError(); err == SpecificError {
 	}
 ```
 
+#### Panic and recover
+
+How about throwing an exception? Go give us that in the form of `panic` which will halt the execution of a program an exit. It also give us a mechanism to recover from `panic`, that is a panic in let's say a function we are consuming will not result in halting the program and give us some means to handle the panic (read exception) which is `recover`. One can think of `panic` as a `throw` statement in other programs and `recover` as a `catch` in other programs.
+
+```go
+func main() {
+	defer func() {
+		if p:= recover(); p!= nil{
+			fmt.Printf("Recovering from our panic! %v", p)  // Recovering from our panic! It is the end of the world!
+		}
+	}()
+	panic("It is the end of the world!")
+}
+```
+
+We notice that the `recover()` built in function would result in a value that might be `nil`, that happens if no error has occurred, i.e no `panic`. Notice that recover is called within a deferred anonymous function, so it executes at the end of the function.
+
 ### Collections
 #### Arrays
 
