@@ -381,6 +381,23 @@ func main() {
 
 We notice that the `recover()` built in function would result in a value that might be `nil`, that happens if no error has occurred, i.e no `panic`. Notice that recover is called within a deferred anonymous function, so it executes at the end of the function.
 
+We can still have a more traditional error handling if we might be recovering from different types of errors, where we switch on the `panic` itself in a similar fashion to handling multiple exceptions.
+
+```go
+func main() {
+	defer func() {
+		switch p := recover(); p {
+		case nil: // no panic has occurred
+		case "It is the end of the world!":
+			fmt.Printf("Recovering from our panic! %v", p)
+		default:
+			fmt.Printf("Recovering from unknown error! %v", p)
+		}
+	}()
+	panic("It is the end of the world!")
+}
+```
+
 ### Collections
 #### Arrays
 
