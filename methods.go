@@ -7,6 +7,8 @@ func main() {
 	fmt.Println("Account before:", a)
 	a = a.add(15)
 	fmt.Println("Account after add:", a)
+
+	account.add(a, 1)
 }
 
 type account struct {

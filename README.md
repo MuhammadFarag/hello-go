@@ -470,6 +470,8 @@ func main() {
 }
 ```
 
+Another point, you might consider a method as a syntactic sugar of a function where its first argument is the receiver. You can use `account.add(a, 1)` instead of `add` on the instance of the type.
+
 In summary, we can think of pointer function receiver as your regular methods in an OOP language, while value function receivers as static methods. In Scala those would be objects within a method. Using the last approach renders types immutable, immutability down side is memory use, but it comes with lots of benefits.
 
 One other thing to note that the receiver type declaration and the method has to be in the same package.
