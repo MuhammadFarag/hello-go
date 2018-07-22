@@ -467,6 +467,32 @@ func main() {
 
 In summary, we can think of pointer function receiver as your regular methods in an OOP language, while value function receivers as static methods. In Scala those would be objects within a method. Using the last approach renders types immutable, immutability down side is memory use, but it comes with lots of benefits.
 
+One other thing to note that the receiver type declaration and the method has to be in the same package.
+
+### Pimp My Library
+
+Pimp my Library is a term coined by *Martin Odersky* explaining how Scala gives you the option of enriching types that you might not own. It comes to mined when you think about how methods can only have receivers in the same package. It turns out it is possible to create methods for receivers you don't own and hence extend existing types or other libraries. There are other advantages of this of course. Let's have a look at enriching int. We will just add a method `Increment` to `int`. This is redundant of course to `+1` or `++` but it is a simple example in one hand, and it is immutable on the other.
+
+```go
+func main() {
+	a := 1
+	a = RichInt(a).Increment().toInt()
+	println(a)
+}
+
+type RichInt int
+
+func (n RichInt) Increment() RichInt {
+	return n + 1
+}
+
+func (n RichInt) toInt() int {
+	return int(n)
+}
+```
+
+We had to create a new type, but if we have more methods, not just Increment, this seems like an option.
+
 ### Collections
 #### Arrays
 
@@ -642,3 +668,4 @@ default:
 5. [Go wiki: Switch](https://github.com/golang/go/wiki/Switch)
 6. [The Go Programming Language Specification](https://golang.org/ref/spec)
 7. [Go by Example](https://gobyexample.com/)
+8. [Pimp My Library ~ Martin Odersky](https://www.artima.com/weblogs/viewpost.jsp?thread=179766)
