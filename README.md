@@ -416,14 +416,34 @@ Let's give it a shot
 ```go
 func main() {
 	a:= account{}
-	fmt.Println("Account before: %v", a)        // Account before: %v {0}
+	fmt.Println("Account before:", a)        // Account before: %v {0}
 	a.add(15)
-	fmt.Println("Account after add: %v", a)     // Account after add: %v {0}
+	fmt.Println("Account after add:", a)     // Account after add: %v {0}
 }
 ```
 
 What just happened? Since by default in Go function arguments are passed by value not by reference, what was passed into the add function was a copy of account. So changes in the value itself doesn't affect the value of `a` in the main function. To use more accurate language, that first argument (before the method name) is called *function receiver*. So, the function receiver is a copy.
 
+There are two ways to go over this, let's take the more obvious if you are coming from OOP background. Instead of having the receiver of type `account` we change it to `*account`.
+
+```go
+func (a *account) add(amount int) {
+	a.money += amount
+}
+```
+
+Without changing anything in the code in main, we will get the result we were looking for.
+
+```go
+func main() {
+	a:= account{}
+	fmt.Println("Account before:", a)        // Account before: %v {0}
+	a.add(15)
+	fmt.Println("Account after add:", a)     // Account after add: %v {15}
+}
+```
+
+Note that conveniently we didn't need to qualify `a` as `&a` (address of a).
 
 
 ### Collections
