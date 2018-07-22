@@ -445,6 +445,27 @@ func main() {
 
 Note that conveniently we didn't need to qualify `a` as `&a` (address of a).
 
+Another solution, if you are like me coming from Functional Programming background (Scala), you'd return a copy of the receiver.
+
+```go
+func (a account) add(amount int) account {
+	a.money += amount
+	return a
+}
+```
+
+The main function will slightly change:
+
+```go
+func main() {
+	a := account{}
+	fmt.Println("Account before:", a)
+	a = a.add(15)
+	fmt.Println("Account after add:", a)
+}
+```
+
+In summary, we can think of pointer function receiver as your regular methods in an OOP language, while value function receivers as static methods. In Scala those would be objects within a method. Using the last approach renders types immutable, immutability down side is memory use, but it comes with lots of benefits.
 
 ### Collections
 #### Arrays
