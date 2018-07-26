@@ -22,6 +22,7 @@
     - [Panic and recover](#panic-and-recover)
 - [Methods](#methods)
 - [Pimp My Library](#pimp-my-library)
+- [Interfaces](#interfaces)
 - [Collections](#collections)
     - [Arrays](#arrays)
     - [Slices](#slices)
