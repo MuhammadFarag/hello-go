@@ -500,6 +500,32 @@ func (n RichInt) toInt() int {
 
 We had to create a new type, but if we have more methods, not just Increment, this seems like an option.
 
+### Interfaces
+
+There is no inheritance in Go, but there are interfaces! Interfaces has methods and any type having the same methods *satisfies* that interface. In that sense, that type is an instance of that interface. So, in Go, you will not find extends or with. It just happens. In my personal opinion, you lose a bit of type self-documentation. Thus, there is no override either. So, unless I discover something interesting, you might rename a method and no longer satisfy an interface that the type used to.
+
+```go
+func main() {
+	var s Speaker
+	s = Person{"Muhammad"}
+	s.speak()
+}
+
+type Speaker interface {
+	speak()
+}
+
+type Person struct {
+	name string
+}
+
+func (p Person) speak(){
+	println("My name is", p.name)
+}
+```
+
+Just to re-iterate, in the above example the type `Person` is a `Speaker`, because it has the method `speak`.
+
 ### Collections
 #### Arrays
 
