@@ -17,3 +17,12 @@ type Person struct {
 func (p Person) speak() {
 	println("My name is", p.name)
 }
+
+type SoccerPlayer interface {
+	Play()
+}
+
+type SoccerSpeaker interface {
+	Speaker
+	SoccerPlayer
+}

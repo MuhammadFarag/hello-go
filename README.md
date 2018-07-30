@@ -527,6 +527,25 @@ func (p Person) speak(){
 
 Just to re-iterate, in the above example the type `Person` is a `Speaker`, because it has the method `speak`.
 
+ We can compose interfaces using type embedding.
+
+ ```go
+ type Speaker interface {
+ 	speak()
+ }
+ 
+type SoccerPlayer interface {
+	Play()
+}
+
+type SoccerSpeaker interface {
+	Speaker
+	SoccerPlayer
+} 
+ ```
+
+So, if some type satisfies *SoccerSpeaker* it satisfies the other two as well.
+
 ### Collections
 #### Arrays
 
