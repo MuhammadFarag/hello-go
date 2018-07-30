@@ -546,6 +546,14 @@ type SoccerSpeaker interface {
 
 So, if some type satisfies *SoccerSpeaker* it satisfies the other two as well.
 
+Without explicit extension there is a probability that some one would refactor a piece of code without realizing that it satisfies one interface or the other. Turns out there is an *ugly* work around. By declaring a dummy variable in your type you can make it more explicit. It might be useful as documentation. But also, it helps your tooling to scream at you when you rename a function.
+
+```go
+var _ Speaker = Person{}
+```
+
+
+
 ### Collections
 #### Arrays
 

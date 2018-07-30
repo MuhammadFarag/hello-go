@@ -10,6 +10,8 @@ type Speaker interface {
 	speak()
 }
 
+var _ Speaker = Person{}
+
 type Person struct {
 	name string
 }
