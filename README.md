@@ -7,6 +7,7 @@
 - [Commandline](#commandline)
     - [Arguments](#arguments)
     - [Flags](#flags)
+    - [Custom flags](#custom-flags)
 - [Variable declaration](#variable-declaration)
     - [Interesting aspects of variable declaration:](#interesting-aspects-of-variable-declaration)
 - [Type](#type)
@@ -68,6 +69,36 @@ arguments :=
 ```
 
 `flag` package gives a convenient function to reach commandline arguments without the flags using `flag.Args()`. Of course, you can declare as many flags as you want. You can also use other types such a boolean flag using `flag.Bool(...)` function. One thing to note, the call to `flag.Parse()` must proceed calling `flag.Args()`
+
+#### Custom flags
+To create a custom flag we need to satisfy the `flag.Value` interface. I am using a simple example custom parsing a float. Note that we are reinventing `flag.Float64()` for demonstration purposes.
+
+```go
+type floatFlag struct {
+	 float64
+}
+
+func (m *floatFlag) String() string {
+	return fmt.Sprintf("%v", m.float64)
+}
+
+func (m *floatFlag) Set(s string) error {
+	m.float64, _ = strconv.ParseFloat(s, 32)
+	return nil
+}
+```
+
+We defined a new type `floatFlag` that satisfies the `flag.Value` interface. Thus it has the `String` and `Set` methods. This is a simple implementation without error handling. Now we need the following in our main to use this custom flag.
+
+```go
+f:= floatFlag{9} // set default value
+	flag.CommandLine.Var(&f, "flag-name", "usage of this test flag")
+	flag.Parse()
+	fmt.Println(f.float64) // will give us the value passed to commandline 
+```
+
+Now if we call our app with `-flag-name 2.5`, the value of `f.float64` will be `2.5`
+
 
 ### Variable declaration
 
