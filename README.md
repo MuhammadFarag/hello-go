@@ -23,6 +23,7 @@
 - [Methods](#methods)
 - [Pimp My Library](#pimp-my-library)
 - [Interfaces](#interfaces)
+    - [any or object](#any-or-object)
 - [Collections](#collections)
     - [Arrays](#arrays)
     - [Slices](#slices)
@@ -552,6 +553,10 @@ Without explicit extension there is a probability that some one would refactor a
 var _ Speaker = Person{}
 ```
 
+
+#### any or object
+
+In other languages such as Java or Scala there is a type that represents anything. In Java it is `object` and in Scala it is `any`. You can have the same effect by using `interface {}` in Go, since any type satisfies this interface. You will need type matching or some reflection magic to make use of the value you have based though, which is the same as any other typed language.
 
 
 ### Collections
