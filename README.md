@@ -701,6 +701,44 @@ for k, v := range map2 {
 
 This is intentionally a subset of Maps. There is no sets in Go, but since map keys can't duplicate, maps can be used to represent sets. For an example to represent a set of strings we can use `map[string]bool` This is a "set of strings"
 
+### Go Routines
+
+We can think of a go routine as a lightweight thread. Everything in go is executed in a `goroutine`, note it is written as one word. When you start the main function it is on a goroutine, the main goroutine. To span a new goroutine all you need to do is use the magic word `go`.
+
+Let's start with a simple program to print count up with a delay.
+
+```go
+func main() {
+	printCountUp("A")
+	printCountUp("B")
+}
+
+func printCountUp(prefix string) {
+	for i := 0; i < 10; i++ {
+		fmt.Printf("%s-%d ", prefix,  i)
+		time.Sleep(100 *  time.Millisecond)
+	}
+}
+```
+Running this will output the expected result: `A-0 A-1 A-2 A-3 A-4 A-5 A-6 A-7 A-8 A-9 B-0 B-1 B-2 B-3 B-4 B-5 B-6 B-7 B-8 B-9`
+
+Let's introduce the `go` keyword
+
+```go
+go printCountUp("A")
+printCountUp("B")
+```
+
+Now we get `B-0 A-0 A-1 B-1 A-2 B-2 A-3 B-3 A-4 B-4 A-5 B-5 A-6 B-6 A-7 B-7 A-8 B-8 A-9 B-9` Which is expected and the program would run almost at half the time. Now let's go a bit further
+
+```go
+go printCountUp("A")
+go printCountUp("B")
+```
+
+The program will terminate immediately and we will get no output. The reason being that the parent goroutine, the main goroutine in this case, has terminated and took its children down with it.
+
+
 ### File IO
 #### Reading files
 ##### Scanning files
