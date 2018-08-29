@@ -738,6 +738,30 @@ go printCountUp("B")
 
 The program will terminate immediately and we will get no output. The reason being that the parent goroutine, the main goroutine in this case, has terminated and took its children down with it.
 
+There are many reasons why you would in a real world program to go to multiple routines in the same time and waiting for them all to finish. For that we have a `WaitGroup`. Let's look at a better implementation.
+
+```go
+func main() {
+	var wg sync.WaitGroup
+	wg.Add(2)
+	
+	go func() {
+		defer wg.Done()
+		printCountUp("A")
+	}()
+	go func() {
+		defer wg.Done()
+		printCountUp("B")
+	}()
+	
+	wg.Wait()
+}
+```
+This will print again `B-0 A-0 A-1 B-1 A-2 B-2 A-3 B-3 A-4 B-4 A-5 B-5 A-6 B-6 A-7 B-7 A-8 B-8 A-9 B-9 ` as expected. Note that we can call `wg.Add` twice with the argument set to `1` in each time... It is just the number of goroutines to wait for.
+
+If we would have called `wg.Add(1)` only once, we would have finished execution whenever one of the two routines finished executing. If we would have used `wg.Add(3)`, in this case at least, we will get a deadlock exception `fatal error: all goroutines are asleep - deadlock!`.
+
+Reference:  [How to Wait for All Goroutines to Finish Executing Before Continuing](https://nathanleclaire.com/blog/2014/02/15/how-to-wait-for-all-goroutines-to-finish-executing-before-continuing/)
 
 ### File IO
 #### Reading files

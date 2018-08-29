@@ -2,12 +2,24 @@ package main
 
 import (
 	"fmt"
+	"sync"
 	"time"
 )
 
 func main() {
-	go printCountUp("A")
-	printCountUp("B")
+	var wg sync.WaitGroup
+	wg.Add(3)
+
+	go func() {
+		defer wg.Done()
+		printCountUp("A")
+	}()
+	go func() {
+		defer wg.Done()
+		printCountUp("B")
+	}()
+
+	wg.Wait()
 }
 
 func printCountUp(prefix string) {
@@ -15,4 +27,5 @@ func printCountUp(prefix string) {
 		fmt.Printf("%s-%d ", prefix, i)
 		time.Sleep(100 * time.Millisecond)
 	}
+
 }
