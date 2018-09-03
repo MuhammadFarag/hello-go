@@ -804,9 +804,18 @@ func printOutput(counts chan int) {
 }
 ```
 
-Executing the above code will print the numbers as expected but will panic `all goroutines are asleep - deadlock!`. `printOutput` is still waiting for a value from the channel, but nothing is being sent. It is a deadlock indeed!
+Executing the above code will print the numbers as expected but will panic at the end with `all goroutines are asleep - deadlock!`. `printOutput` is still waiting for a value from the channel, but nothing is being sent. It is a deadlock indeed!
 
-Go has a mechanism to handle this issue. The sender can close the channel and thus signal the receiver that it no longer has any more information to send. The receiver can use an optional second boolean result value to know whether the channel was closed or not `i, ok := <- counts` By convention, we will assign the value and check if the channel is closed in the same step `if i, ok := <- counts; ok`.
+Go has a mechanism to handle this issue. The sender can close the channel and thus signal the receiver that it no longer has any more information to send. We will use the built in `close` function by deferring that call before we are done waiting.
+
+```go
+go func() {
+	defer close(countChannel)
+	defer wg.Done()
+	countUp(countChannel)
+}()
+```
+ The receiver can use an optional second boolean result value to know whether the channel was closed or not `i, ok := <- counts` By convention, we will assign the value and check if the channel is closed in the same step `if i, ok := <- counts; ok`. All what we need to do is to close the channel.
 
 ```go
 func printOutput(counts chan int) {
@@ -819,15 +828,6 @@ func printOutput(counts chan int) {
 	}
 }
 ```
-Now all what we need to do is to close the channel. We will use the built in `close` function by deferring that call before we are done waiting.
-
-```go
-go func() {
-	defer close(countChannel)
-	defer wg.Done()
-	countUp(countChannel)
-}()
-```
 
 Turns out that Go has a more concise way to listen for a channel until it is closed using our friend `range` which we used before to iterate over a collection.
 
@@ -838,6 +838,10 @@ func printOutput(counts chan int) {
 	}
 }
 ```
+
+#### Notes
+- Sending a message to a closed channel will panic
+- Closing an already closed channel will panic
 
 ### File IO
 #### Reading files
