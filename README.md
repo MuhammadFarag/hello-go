@@ -764,6 +764,11 @@ If we would have called `wg.Add(1)` only once, we would have finished execution 
 
 Reference:  [How to Wait for All Goroutines to Finish Executing Before Continuing](https://nathanleclaire.com/blog/2014/02/15/how-to-wait-for-all-goroutines-to-finish-executing-before-continuing/)
 
+### Channels
+
+GoRoutines mechanism of parallelism is already a leap forward compared to many other languages since it has it as a core concept of the language. But Go goes a step further by giving a mechanism for goroutines to communicate. This is as dangerous as it is useful. I would highly suggest not to use this to synchronize go routine execution. Once you do that for the most part you lose the benefits of parallelism but keep the complexity. Of course, there might be a reason for it, but you really need to think hard and find a justification for the cost of the complexity in that case.
+
+
 ### File IO
 #### Reading files
 ##### Scanning files
