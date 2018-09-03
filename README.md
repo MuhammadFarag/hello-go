@@ -829,6 +829,16 @@ go func() {
 }()
 ```
 
+Turns out that Go has a more concise way to listen for a channel until it is closed using our friend `range` which we used before to iterate over a collection.
+
+```go
+func printOutput(counts chan int) {
+	for i := range counts{
+		fmt.Printf("%d ", i)
+	}
+}
+```
+
 ### File IO
 #### Reading files
 ##### Scanning files

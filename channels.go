@@ -33,11 +33,7 @@ func countUp(counts chan int) {
 }
 
 func printOutput(counts chan int) {
-	for {
-		if i, ok := <-counts; ok {
-			fmt.Printf("%d ", i)
-			continue
-		}
-		return
+	for i := range counts {
+		fmt.Printf("%d ", i)
 	}
 }
