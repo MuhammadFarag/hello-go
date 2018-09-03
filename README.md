@@ -768,6 +768,8 @@ Reference:  [How to Wait for All Goroutines to Finish Executing Before Continuin
 
 GoRoutines mechanism of parallelism is already a leap forward compared to many other languages since it has it as a core concept of the language. But Go goes a step further by giving a mechanism for goroutines to communicate. This is as dangerous as it is useful. I would highly suggest not to use this to synchronize go routine execution. Once you do that for the most part you lose the benefits of parallelism but keep the complexity. Of course, there might be a reason for it, but you really need to think hard and find a justification for the cost of the complexity in that case.
 
+#### Unbuffered Channels
+
 Let's look at the simple printCountUp example from the previous section. Let's split counting up and printing into two different functions. One to count up and the other to print. The only new part here will be the `countChannel`. We construct a channel by using the built int function ` make(chan int)`. We have seen the `make` built in function before, the new thing here is the `chan` keyword which creates a channel and has to be followed by the type of the channel. We'll see more sophisticated examples later. Both `countUp` and `printOutput` functions take the channel as an argument. The first channel sends the current countUp value to the channel using `channelName <- value` and the latter receives the value using `value <- channelName` in an infinite loop.
 
 ```go
@@ -838,6 +840,8 @@ func printOutput(counts chan int) {
 	}
 }
 ```
+
+Now, that we have seen the code above, it is simple to see that the same could have been done by passing one function to the other. With no need for using unbuffered channel. The code would have been easier to reason about. Hence, you need to justify the use of channels fo synchronization as mentioned in the beginning.
 
 #### Notes
 - Sending a message to a closed channel will panic
