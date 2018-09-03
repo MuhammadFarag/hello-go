@@ -768,6 +768,66 @@ Reference:  [How to Wait for All Goroutines to Finish Executing Before Continuin
 
 GoRoutines mechanism of parallelism is already a leap forward compared to many other languages since it has it as a core concept of the language. But Go goes a step further by giving a mechanism for goroutines to communicate. This is as dangerous as it is useful. I would highly suggest not to use this to synchronize go routine execution. Once you do that for the most part you lose the benefits of parallelism but keep the complexity. Of course, there might be a reason for it, but you really need to think hard and find a justification for the cost of the complexity in that case.
 
+Let's look at the simple printCountUp example from the previous section. Let's split counting up and printing into two different functions. One to count up and the other to print. The only new part here will be the `countChannel`. We construct a channel by using the built int function ` make(chan int)`. We have seen the `make` built in function before, the new thing here is the `chan` keyword which creates a channel and has to be followed by the type of the channel. We'll see more sophisticated examples later. Both `countUp` and `printOutput` functions take the channel as an argument. The first channel sends the current countUp value to the channel using `channelName <- value` and the latter receives the value using `value <- channelName` in an infinite loop.
+
+```go
+func main() {
+	countChannel := make(chan int)
+	var wg sync.WaitGroup
+	wg.Add(2)
+
+	go func() {
+		defer wg.Done()
+		printOutput(countChannel)
+	}()
+
+	go func() {
+		defer wg.Done()
+		countUp(countChannel)
+	}()
+
+	wg.Wait()
+}
+
+func countUp(counts chan int) {
+	for i := 0; i < 10; i++ {
+		time.Sleep(500 * time.Millisecond)
+		counts <- i
+	}
+}
+
+func printOutput(counts chan int) {
+	for {
+		i := <-counts
+		fmt.Printf("%d ", i)
+	}
+}
+```
+
+Executing the above code will print the numbers as expected but will panic `all goroutines are asleep - deadlock!`. `printOutput` is still waiting for a value from the channel, but nothing is being sent. It is a deadlock indeed!
+
+Go has a mechanism to handle this issue. The sender can close the channel and thus signal the receiver that it no longer has any more information to send. The receiver can use an optional second boolean result value to know whether the channel was closed or not `i, ok := <- counts` By convention, we will assign the value and check if the channel is closed in the same step `if i, ok := <- counts; ok`.
+
+```go
+func printOutput(counts chan int) {
+	for {
+		if i, ok := <-counts; ok {
+			fmt.Printf("%d ", i)
+			continue
+		}
+		return
+	}
+}
+```
+Now all what we need to do is to close the channel. We will use the built in `close` function by deferring that call before we are done waiting.
+
+```go
+go func() {
+	defer close(countChannel)
+	defer wg.Done()
+	countUp(countChannel)
+}()
+```
 
 ### File IO
 #### Reading files
