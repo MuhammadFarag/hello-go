@@ -29,6 +29,7 @@
     - [Arrays](#arrays)
     - [Slices](#slices)
     - [Maps](#maps)
+- [Go Routines](#go-routines)
 - [File IO](#file-io)
     - [Reading files](#reading-files)
 - [Switch](#switch)
