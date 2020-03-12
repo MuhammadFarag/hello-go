@@ -39,19 +39,19 @@
 - [Resources](#resources)
 
 ### Interesting concepts
-* Unused variables result in compilation error, but unused constants do not.
-* We might need to pay attention of the order of fields in a `struct` to optimize memory allocation due to **alignment**.
-* Following the above point: The fact that go encourages short variable names bugs me. In my point of view makes the code a tad harder to reason about.
+* Unused variables result in compilation error, but unused constants do not show this behaviour.
+* We need to pay attention to the order of fields in a `struct` to optimize memory allocation due to **alignment**.
+* Following is the explanation of above point: The fact that go encourages short variable names bugs me. I think it makes the code a tad harder to reason about.
 
 ### Code style
-* If an identifier name start with an upper case letter, it is `exported` which means it is visible outside of its package. Yes, visibility is determined by the case of the first letter.
+* If an identifier name starts with upper case letter, it is `exported` which means it's visible outside of the package. Yes, visibility is determined by the case of the identifier's first letter.
 * The letters of acronyms are rendered in the same case. e.g. `someAPI` not `someApi`
-* File names should not include `-`, `_` or use camel case. Yes, just short lower case name. Of course it could be `shortname.go` or `shrtnm.go`. The reason why underscores are not a good idea, Go build tool actually uses underscores to distinguish between different architectures.
+* File names should not include `-`, `_` or use camel case. Yes, just short lower case name. Of course it could be `shortname.go` or `shrtnm.go`. The reason why underscores are not a good idea is that Go build tool actually uses underscores to distinguish between different architectures.
 
 ### Commandline
 
 #### Arguments
-The `main` function which acts as the entry point of the program doesn't take arguments. To read arguments from command line you will find them in `os.Args`
+The `main` function which acts as the entry point of program doesn't take arguments. To read arguments from command line you will find them in `os.Args`
 
 ```go
 import "os"
@@ -72,7 +72,7 @@ println(*f)
 arguments :=
 ```
 
-`flag` package gives a convenient function to reach commandline arguments without the flags using `flag.Args()`. Of course, you can declare as many flags as you want. You can also use other types such a boolean flag using `flag.Bool(...)` function. One thing to note, the call to `flag.Parse()` must proceed calling `flag.Args()`
+`flag` package gives a convenient function to reach commandline arguments without the flags using `flag.Args()`. Of course, you can declare as many flags as you want. You can also use other types, such a boolean flag using `flag.Bool(...)` function. One thing to note is that, the call to `flag.Parse()` must proceed calling `flag.Args()`
 
 #### Custom flags
 To create a custom flag we need to satisfy the `flag.Value` interface. I am using a simple example custom parsing a float. Note that we are reinventing `flag.Float64()` for demonstration purposes.
@@ -92,7 +92,7 @@ func (m *floatFlag) Set(s string) error {
 }
 ```
 
-We defined a new type `floatFlag` that satisfies the `flag.Value` interface. Thus it has the `String` and `Set` methods. This is a simple implementation without error handling. Now we need the following in our main to use this custom flag.
+We have defined a new type `floatFlag` that satisfies the `flag.Value` interface. Thus it has the `String` and `Set` methods. This is a simple implementation without error handling. Now we need the following in our main to use this custom flag.
 
 ```go
 f:= floatFlag{9} // set default value
@@ -114,11 +114,11 @@ b := 3
 
 Any variable in Go is initialized to a value, which is all bits set to zero by default. For numeric values that would be zero, for a string that would be an empty string.
 
-The `:=` operator creates and assign a variable. `var a int` `var a int = 0`, `var a = 0` and `a := 0` have the same result. Note that Go has type inference, so you don't need to declare types explicitly.
+The `:=` operator creates and assigns a variable. `var a int` `var a int = 0`, `var a = 0` and `a := 0` have the same result. Note that Go has type inference, so you don't need to declare types explicitly.
 
 Go doesn't have casting but instead it has conversion, which means you are creating a new variable and convert to it. You can even do that on declaration, so for an example you can say `a := float64(1.0)`
 
-I searched for something similar to Scala's `val` the closest thing is `const`, which you can use as `const a = 1`
+I have also searched for something similar to Scala's `val` and I found that the closest thing is `const`, which you can use as `const a = 1`
 
 #### Interesting aspects of variable declaration:
 
@@ -131,7 +131,7 @@ i, j = j, i //swap variables
 
 ### Type
 
-`type` is not a type alias, which is different than Scala for an example. Which means the new type is not compatible, assignable or comparable to the original type. In my mind this is better than type aliasing because type aliasing, if overused, is in many cases redundant and confusing.
+`type` is not a type alias, which is different than Scala for example. Which means the new type is not compatible, assignable or comparable to the original type. In my mind this is better than type aliasing because type aliasing, if it is overused, it ends up in many cases to be  redundant and confusing.
 `type timeInSeconds int` and `type timeInMilliSeconds float` are not compatible. You need to cast from one to the other (or just for correctness to `int` and then to the other) to convert.
 
 ```go
@@ -162,14 +162,14 @@ a := person{
 }
 ```
 
-We can instantiate person without naming the fields, given that we provide all fields in the correct order. If we don't provide any of the fields, i.e. use `{}` we end up with an object with all its fields set to its corresponding zero value.
+We can instantiate person without naming the fields, given that we provide all fields in the correct order. If we don't provide any of the fields, i.e. use `{}` we end up with an object having all its fields set to the corresponding zero value.
 
 ```go
 a1 := person {"name 1", 1}
 a2 := person {}
 ```
 
-There is also the built in function `new` which creates a pointer to a zero allocation of the type, thus the following two are identical
+There is also the built in function `new` which creates a pointer to a zero allocation of the type, thus the following two declarations are identical
 ```go
 a2 := &person {}
 a3 := new(person)
@@ -198,7 +198,7 @@ type player struct {
 }
 ```
 
-We notice that we have two *anonymous* fields, one of type `person` and the other of type `int`. The question now, how do you access those? The field names are implicit and they are the same as the type.
+We notice that we have two *anonymous* fields, one of type `person` and the other of type `int`. The question now is, how do you access those? The field names are implicit and they are same as the type.
 
 ```go
 p := player{person{"jack", 23}, "game", 1}
@@ -208,13 +208,13 @@ fmt.Println(p.person.name)  // jack
 fmt.Println(p.int)          // 1
 ```
 
-Go also give us another interesting feature, you can access the fields of the embedded type, `person` in our case, directly using `p.name` for example... just like that.
+Go also gives us another interesting feature, you can access the fields of the embedded type, `person` in our case, directly using `p.name` for example... just like that.
 
 ```go
 fmt.Println(p.name)         // jack
 ```
 
-If both the embedded and the embedding type has fields holding the same name, then you will need to use `p.name` for the embedding type and `p.person.name` for the embedded type. Let's redefine our type player and create an instance of it.
+If both the embedded and embedding types have fields holding the same name, then you will need to use `p.name` for the embedding type and `p.person.name` for the embedded type. Let's redefine our type player and create an instance of it.
 
 ```go
 type player struct {
@@ -238,10 +238,10 @@ fmt.Println(p.int)          // 1
 
 Notes:
 
-* we can perform conversion from one *struct* to the other if they have the same exact fields.
+* we can perform conversion from one *struct* to another if they have exactly same fields.
 * Anonymous *struct* doesn't require explicit conversion, if types are identical.
-* Field order is part of a type. Different field orders means different types, even if the fields are identical.
-* If we are trying to access a field in a pointer to a struct, we don't need to explicitly use `*` to get to the contents of that stucts, we can use `.` directly. That is the following two lines of codes will print the exact same thing
+* Field order is part of a type. Different field order means different types, even if the fields are identical.
+* If we are trying to access a field in a pointer to struct, we don't need to explicitly use `*` to get to the contents of that struct, we can use `.` directly. That is the following two lines of codes will print the exact same thing
 
 ```go
 fmt.Println(b.description)
@@ -287,7 +287,7 @@ func threeTimes(a, b string) (r1 string, r2 string, r3 string) {
 }
 ```
 
-It is possible to omit the arguments of the return statement if the named results if they have been assigned within the function, but that is not recommended because it makes code harder to reason about.
+It is possible to omit the arguments of return statement, if the named results have been assigned within the function, but that is not recommended because it makes code harder to reason about.
 
 ```go
 func namedResult() (r string){
@@ -298,7 +298,7 @@ func namedResult() (r string){
 Go doesn't support tail recursion optimization. However, function stacks in go is dynamic which mitigate the risk of stack over flow, thus most of reasonably bound or terminating recursion calls are safe.
 
 #### Higher order functions
-Higher order functions are functions that take functions as their argument. Since functions are first class citizens in Go, they have a type and they can be passed around. a function type is a representation for its arguments and its return. In this case we are passing behaviour as a parameter.
+Higher order functions are functions that take functions as their argument. Since functions are first class citizens in Go, they have a type and they can be passed around. A function type is the representation of both its arguments and its return. In this case we are passing behaviour as a parameter.
 
 ```go
 func consumeBehaviour(f func() string) {
@@ -316,7 +316,7 @@ consumeBehaviour(func () string {return "Hi"})
 
 #### Variadic function
 
-A variadic function can receive zero or more of its arguments. The significant thing to note here is the signature of the function `func(...int)`, which means it doesn't have the same signature as `func([]int)` which is a function taking a slice of int.
+A variadic function can receive zero or more of its arguments. The significant thing to note here is the signature of function `func(...int)`, which means it doesn't have the same signature as `func([]int)` which is a function taking a slice of int.
 ```go
 func variadic(x...int){
 	println(fmt.Sprintf("The type of this function is: %T", variadic))              //  The type of this function is: func(...int)
@@ -390,7 +390,7 @@ if _, err := somethingElseMightGoWrong(); err !=nil {
 }
 ```
 
-The downside with that though is that the function results are only visible within the scope of the if statement, which might be ok in some cases.
+The downside with that is the function results are only visible within the scope of the if statement, which might be ok in some cases.
 
 We can define specific errors for comparison purposes. That is in case the client might want to take different actions based on different errors.
 
@@ -408,7 +408,7 @@ if err:= returnSpecificError(); err == SpecificError {
 
 #### Panic and recover
 
-How about throwing an exception? Go give us that in the form of `panic` which will halt the execution of a program an exit. It also give us a mechanism to recover from `panic`, that is a panic in let's say a function we are consuming will not result in halting the program and give us some means to handle the panic (read exception) which is `recover`. One can think of `panic` as a `throw` statement in other programs and `recover` as a `catch` in other programs.
+How about throwing an exception? Go give us that in the form of `panic` which will halt the execution of a program an exit. It also gives us a mechanism to recover from `panic`, that is a panic in let's say a function we are consuming will not result in halting the program and give us some means to handle the panic (read exception) which is `recover`. One can think of `panic` as a `throw` statement in other programs and `recover` as a `catch` in other programs.
 
 ```go
 func main() {
@@ -441,7 +441,7 @@ func main() {
 ```
 
 ### Methods
-Let's create a simple type, `account` which has one field `money`, we will create a one method `add` which will add some money to the account.
+Let's create a simple type, `account` which has one field `money`, we will create one method `add` which will add some money to the account.
 
 ```go
 type account struct {
@@ -507,7 +507,7 @@ func main() {
 }
 ```
 
-Another point, you might consider a method as a syntactic sugar of a function where its first argument is the receiver. You can use `account.add(a, 1)` instead of `add` on the instance of the type.
+Another point, you might consider a method as syntactic sugar for a function where that function's first argument is the receiver. You can use `account.add(a, 1)` instead of `add` on the instance of that type.
 
 In summary, we can think of pointer function receiver as your regular methods in an OOP language, while value function receivers as static methods. In Scala those would be objects within a method. Using the last approach renders types immutable, immutability down side is memory use, but it comes with lots of benefits.
 
@@ -515,7 +515,7 @@ One other thing to note that the receiver type declaration and the method has to
 
 ### Pimp My Library
 
-Pimp my Library is a term coined by *Martin Odersky* explaining how Scala gives you the option of enriching types that you might not own. It comes to mined when you think about how methods can only have receivers in the same package. It turns out it is possible to create methods for receivers you don't own and hence extend existing types or other libraries. There are other advantages of this of course. Let's have a look at enriching int. We will just add a method `Increment` to `int`. This is redundant of course to `+1` or `++` but it is a simple example in one hand, and it is immutable on the other.
+Pimp my Library is a term coined by *Martin Odersky* explaining how Scala gives you the option of enriching types that you might not own. It comes to mind when you think about how methods can only have receivers in the same package. It turns out it is possible to create methods for receivers you don't own and hence extend existing types or other libraries. There are other advantages of this of course. Let's have a look at enriching int. We will just add a method `Increment` to `int`. This is redundant of course to `+1` or `++` but it is a simple example in one hand, and it is immutable on the other.
 
 ```go
 func main() {
@@ -539,7 +539,7 @@ We had to create a new type, but if we have more methods, not just Increment, th
 
 ### Interfaces
 
-There is no inheritance in Go, but there are interfaces! Interfaces has methods and any type having the same methods *satisfies* that interface. In that sense, that type is an instance of that interface. So, in Go, you will not find extends or with. It just happens. In my personal opinion, you lose a bit of type self-documentation. Thus, there is no override either. So, unless I discover something interesting, you might rename a method and no longer satisfy an interface that the type used to.
+There is no inheritance in Go, but there are interfaces! Interfaces have methods and any type that has the same methods *satisfies*  that interface. In that sense, that type is an instance of that interface. So, in Go, you will not find extends or with. It just happens. In my personal opinion, you lose a bit of type self-documentation. Thus, there is no override either. So, unless I discover something interesting, you might rename a method and no longer satisfy an interface that the type used to.
 
 ```go
 func main() {
@@ -682,7 +682,7 @@ map1 := map[string]int{
 }
 ```
 
-To add an item to a map we use `map1["Samsung"] = 3`, to delete an item from a map `delete(map1, "Samsung")`. Finding an item in a map is more interesting, as the result is two variables. The first is the zero value of the value and the second is a boolean that indicates whether or not the element was found.
+To add an item to a map we use `map1["Samsung"] = 3`, to delete an item from a map `delete(map1, "Samsung")`. Finding an item in a map is more interesting, as the result is two variables. The first is the value and the second is a boolean that indicates whether or not the element was found.
 ```go
 v, found := map1["Toshiba"]
 ```
@@ -703,7 +703,7 @@ for k, v := range map2 {
 
 ##### Sets
 
-This is intentionally a subset of Maps. There is no sets in Go, but since map keys can't duplicate, maps can be used to represent sets. For an example to represent a set of strings we can use `map[string]bool` This is a "set of strings"
+This is intentionally a subset of Maps. There is no sets in Go, but since map keys can't duplicate, maps can be used to represent sets. For example to represent a set of strings we can use `map[string]bool` This is a "set of strings"
 
 ### Go Routines
 
@@ -769,7 +769,7 @@ Reference:  [How to Wait for All Goroutines to Finish Executing Before Continuin
 
 ### Channels
 
-GoRoutines mechanism of parallelism is already a leap forward compared to many other languages since it has it as a core concept of the language. But Go goes a step further by giving a mechanism for goroutines to communicate. This is as dangerous as it is useful. I would highly suggest not to use this to synchronize go routine execution. Once you do that for the most part you lose the benefits of parallelism but keep the complexity. Of course, there might be a reason for it, but you really need to think hard and find a justification for the cost of the complexity in that case.
+GoRoutines mechanism of parallelism is already a leap forward compared to many other languages since it is a core concept of the language. But Go goes a step further by giving a mechanism for goroutines to communicate. This is as dangerous as it is useful. I would highly suggest not to use this to synchronize go routine execution. Once you do that for the most part you lose the benefits of parallelism but keep the complexity. Of course, there might be a reason for it, but you really need to think hard and find a justification for the cost of the complexity in that case.
 
 #### Unbuffered Channels
 
